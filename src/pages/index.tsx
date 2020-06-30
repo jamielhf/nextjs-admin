@@ -1,4 +1,8 @@
+import { Button, Switch } from "antd";
+import Layout from '../components/Layout';
 
 export default () => (
-  <div>Welcome to next.js! </div>
+  <Layout>
+    <Button>1</Button>
+  </Layout>
 )
