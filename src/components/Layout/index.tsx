@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Head from 'next/head'
 import RightNav from '../RightNav'
+import Header from '../Header'
 
 export default ({ children, title = 'This is the default title' }: any) => (
   <div>
@@ -16,6 +17,7 @@ export default ({ children, title = 'This is the default title' }: any) => (
         <Link href='/contact'><a>Contact</a></Link>
       </nav>
     </header>
+    <Header></Header>
     <RightNav></RightNav>
     {children}
 

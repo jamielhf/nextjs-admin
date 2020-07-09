@@ -1,6 +1,9 @@
+import { Menu, Layout, Avatar, Popover, Badge, List } from 'antd'
+import './index.less';
+
 const Index = () => {
   return (
-    <div>header</div>
+    <div><Avatar></Avatar></div>
   )
 }
 

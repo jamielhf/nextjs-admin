@@ -5,7 +5,7 @@
       "import",
       {
         "libraryName": "antd",
-        "style": "css" // 引入css
+        "style": "true" // 引入css
       }
     ]
   ]
