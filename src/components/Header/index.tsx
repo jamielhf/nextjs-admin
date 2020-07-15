@@ -3,7 +3,7 @@ import './index.less';
 
 const Index = () => {
   return (
-    <div><Avatar></Avatar></div>
+    <div className="header fixed"><Avatar></Avatar></div>
   )
 }
 
