@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/jamielhf/nextjs-admin#readme",
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.10.5",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",

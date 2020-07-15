@@ -6,6 +6,12 @@
       {
         "libraryName": "antd",
         "style": true // 引入css
+      },
+    ],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
       }
     ]
   ]

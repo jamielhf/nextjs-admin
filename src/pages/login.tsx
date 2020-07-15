@@ -1,6 +1,5 @@
 import { Form, Input, Button, Checkbox, Layout, Row, Col } from 'antd';
 import { observer } from "mobx-react";
-
 const layout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 12 },
@@ -10,10 +9,13 @@ const tailLayout = {
 };
 
 
-export default () => {
+
+const Login = observer(({ store }: any) => {
   const onFinish = (values: any) => {
     console.log('Success:', values);
+    store.user.Login();
   };
+  console.log('Login', store.user);
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -21,6 +23,7 @@ export default () => {
 
   return (
     <Layout className="g-login">
+      <p> {store.user.isLogin}</p>
       <Row>
         <Col span={12} offset={6}>
           <Form
@@ -60,4 +63,6 @@ export default () => {
       </Row>
     </Layout>
   );
-}
+})
+
+export default Login
