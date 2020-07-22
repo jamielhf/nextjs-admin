@@ -1,4 +1,5 @@
 import { Form, Input, Button, Checkbox, Layout, Row, Col } from 'antd';
+import { Istore } from '../store/index'
 import { observer } from "mobx-react";
 const layout = {
   labelCol: { span: 6 },
@@ -8,12 +9,10 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-
-
-const Login = observer(({ store }: any) => {
+const Login = observer(({ store }: { store: Istore }) => {
   const onFinish = (values: any) => {
     console.log('Success:', values);
-    store.user.Login();
+    store.user.Login(values.username, values.password);
   };
   console.log('Login', store.user);
 
@@ -34,28 +33,25 @@ const Login = observer(({ store }: any) => {
             onFinishFailed={onFinishFailed}
           >
             <Form.Item
-              label="Username"
+              label="用户名"
               name="username"
-              rules={[{ required: true, message: 'Please input your username!' }]}
+              rules={[{ required: true, message: '请输入用户名' }]}
             >
               <Input />
             </Form.Item>
 
             <Form.Item
-              label="Password"
+              label="密码"
               name="password"
-              rules={[{ required: true, message: 'Please input your password!' }]}
+              rules={[{ required: true, message: '请输入密码' }]}
             >
               <Input.Password />
             </Form.Item>
 
-            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
 
             <Form.Item {...tailLayout}>
               <Button type="primary" htmlType="submit">
-                Submit
+                登录
         </Button>
             </Form.Item>
           </Form>
