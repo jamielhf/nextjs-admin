@@ -4,7 +4,8 @@
   "description": "nextjs后台管理系统",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev1": "next",
+    "dev": "nodemon server.js",
     "build": "next build",
     "start": "next start"
   },

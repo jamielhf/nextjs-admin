@@ -5,7 +5,7 @@ import { Layout, Menu, } from 'antd';
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const Index = () => {
+const Index = ({ curKey }: { curKey: string }) => {
   return (
     <Sider
       className="g-right-nav"
@@ -19,9 +19,9 @@ const Index = () => {
       }}
     >
       <div className="logo" />
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-        <Menu.Item key="1" icon={<MailOutlined />}>
-          nav 1
+      <Menu theme="dark" mode="inline" defaultSelectedKeys={[curKey || 'article']}>
+        <Menu.Item key="article" icon={<ProfileOutlined />}>
+          文章列表
         </Menu.Item>
         <SubMenu key="sub1" icon={<UserOutlined />} title="User">
           <Menu.Item key="3">Tom</Menu.Item>

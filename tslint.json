@@ -1,11 +1,17 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended"
-    ],
-    "jsRules": {},
-    "rules": {
-      "no-console":false,
-    },
-    "rulesDirectory": []
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "no-console": false,
+    "semi": ["error", "always"]
+  },
+  "linterOptions": {
+    "exclude": [
+      "node_modules/**",
+    ]
+  },
+  "rulesDirectory": []
 }

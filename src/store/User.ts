@@ -9,7 +9,10 @@ class User {
   // }
   @action
   async Login(username: string, password: string) {
-    const res = await api.user.login(username, password);
+    const res: any = await api.user.login(username, password);
+    if (res.code == 200) {
+      localStorage.setItem('token', res.data.data);
+    }
   }
 }
 
