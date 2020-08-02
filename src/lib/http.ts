@@ -1,8 +1,13 @@
 import axios from 'axios';
 import { message, } from 'antd';
 
+axios.defaults.withCredentials = true;
+axios.defaults.timeout = 10000;
+
 axios.interceptors.request.use(
   config => {
+    const token = localStorage.getItem('token');
+    config.headers['token'] = token
     return config;
   },
   error => {
@@ -20,8 +25,5 @@ axios.interceptors.response.use((response) => {
   return Promise.reject(error);
 });
 
-axios.create({
-  timeout: 10000,
-});
 
 export default axios

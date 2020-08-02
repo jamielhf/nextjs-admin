@@ -8,7 +8,12 @@ const Index = ({ data }: any) => {
   </Layout>)
 }
 Index.getInitialProps = async ({ req }: any) => {
-  const res = await fetch('http://localhost:3003/api/article')
+  console.log(req.signedCookies);
+  const res = await fetch('http://lhf.huya.com:3003/api/article', {
+    headers: {
+      "Authorization": 'Bearer ' + req.signedCookies.token
+    }
+  })
   const json = await res.json();
   console.log(json);
   return { data: json }
