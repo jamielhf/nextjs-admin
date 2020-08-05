@@ -10,8 +10,11 @@ class User {
   @action
   async Login(username: string, password: string) {
     const res: any = await api.user.login(username, password);
+    console.log(res);
     if (res.code == 200) {
-      localStorage.setItem('token', res.data.data);
+      localStorage.setItem('token', res.data.token);
+      this.userInfo = res.data.userInfo;
+      location.href = '/';
     }
   }
 }

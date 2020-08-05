@@ -1,13 +1,20 @@
 import axios from 'axios';
 import { message, } from 'antd';
+const instance = axios.create({
+  timeout: 10000,
+  withCredentials: true
+});
 
-axios.defaults.withCredentials = true;
-axios.defaults.timeout = 10000;
 
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   config => {
-    const token = localStorage.getItem('token');
-    config.headers['token'] = token
+    let token;
+    try {
+      token = localStorage && localStorage.getItem('token');
+    } catch (e) {
+      console.log(e);
+    }
+    config.headers['Authorization'] = `Bearer ${token}`;
     return config;
   },
   error => {
@@ -15,15 +22,18 @@ axios.interceptors.request.use(
   }
 );
 
-axios.interceptors.response.use((response) => {
-  console.log(response);
-  // if (response.data.code !== 200) {
-  //   message.info(response.data.msg);
-  // }
-  return response;
+instance.interceptors.response.use((response) => {
+  if (response.data.code === 401) {
+    try {
+      window.location.href = '/login';
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  return response.data;
 }, (error) => {
   return Promise.reject(error);
 });
 
 
-export default axios
+export default instance

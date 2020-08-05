@@ -14,3 +14,7 @@ export function login(username: string, password: string) {
     password
   })
 }
+
+export function userInfo() {
+  return http.get(`${BASE_URL}api/user/info`);
+}
