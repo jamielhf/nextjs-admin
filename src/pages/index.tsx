@@ -1,17 +1,43 @@
-import { Button, Switch } from "antd";
+import { Button, Table, Switch } from "antd";
 import Layout from '../components/Layout';
 import Router from 'next/router'
-import { article } from '../api/article'
+import { serverArticle } from '../api/article'
 
-
+interface IBaseRes {
+  code: number;
+  data: any;
+  msg: string
+}
 const Index = ({ data }: any) => {
+  const columns = [
+    {
+      title: 'ID',
+      dataIndex: 'id',
+      key: 'id',
+    },
+    {
+      title: '文章标题',
+      dataIndex: 'title',
+      key: 'title',
+    },
+    {
+      title: '文章内容',
+      dataIndex: 'content',
+      key: 'content',
+    },
+  ];
   return (<Layout>
-    {JSON.stringify(data)}
+    <Table dataSource={data} columns={columns} />;
   </Layout>)
 }
-Index.getInitialProps = async ({ req }: any) => {
-  const res = await article()
-  return { data: res }
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await serverArticle();
+  // Pass data to the page via props
+  if (res.data.code === 200) {
+    return { props: { data: res.data.data } }
+  }
+  return { props: { data: {} } }
 }
 
 export default Index
