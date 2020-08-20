@@ -1,34 +1,40 @@
+
 import { Button, Table, Switch } from "antd";
 import Layout from '../components/Layout';
 import Router from 'next/router'
-import { serverArticle } from '../api/article'
+import { serverCategory } from '../api/category'
 
 const Index = ({ data = [] }: any) => {
   const columns = [
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
-    },
-    {
-      title: '文章标题',
+      title: '分类',
       dataIndex: 'title',
+      width: 100,
       key: 'title',
     },
     {
-      title: '文章内容',
-      dataIndex: 'content',
-      key: 'content',
+      title: '标签',
+      width: 200,
+      dataIndex: 'tag',
+      key: 'tag',
+    },
+    {
+      title: 'Action',
+      key: 'operation',
+      // fixed: 'right',
+      width: 100,
+      render: () => <a>action</a>,
     },
   ];
-  return (<Layout>
+  return (<Layout curKey="article">
     <Table dataSource={data} columns={columns} />
   </Layout>)
 }
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await serverArticle();
+  const res = await serverCategory();
   // Pass data to the page via props
+  console.log(res.data.data);
   if (res.data.code === 200) {
     return { props: { data: res.data.data } }
   }

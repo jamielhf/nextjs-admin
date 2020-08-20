@@ -26,7 +26,7 @@ app.prepare()
     server.use(cookieParser('4EqStMNyab8'));
 
     server.get('/', isAuthenticated, (req, res) => {
-      return app.render(req, res, '/', req.query)
+      return app.render(req, res, '/article', req.query)
     })
     server.get('/login', (req, res) => {
       return app.render(req, res, '/login', req.query)
