@@ -8,12 +8,13 @@ autorun(() => {
   console.log('user', user);
 })
 
+
 export interface Istore {
   user: User,
   model: Model,
 }
 
-export {
+export default {
   user,
   model,
 }

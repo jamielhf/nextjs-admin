@@ -3,63 +3,58 @@ import { Button, Table, Switch, Modal } from "antd";
 import Layout from '../components/Layout';
 import Router from 'next/router'
 import { serverTag } from '../api/tags'
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { Istore } from '../store/index'
+import { observer, inject } from 'mobx-react'
+import { withDefaultProps } from '../lib/withDefaultProps';
 
-const Index = ({ store, data = [] }: any) => {
-  console.log(store);
-  const [delModel, setDelModel] = useState(false);
-
-  const columns = [
-    {
-      title: '标签',
-      dataIndex: 'title',
-      width: 100,
-      key: 'title',
-    },
-    {
-      title: '图标',
-      dataIndex: 'icon',
-      width: 100,
-      key: 'icon',
-      render: (icon: string) => (
-        <img width="50" src={icon} />
-      ),
-    },
-    {
-      title: '操作',
-      key: 'operation',
-      // fixed: 'right',
-      width: 100,
-      render: () => <div><a onClick={showModal}>编辑</a> <a onClick={showModal}>删除</a> </div>,
-    },
-  ];
-  const showModal = () => {
-    setDelModel(true)
-  };
-
-  const handleOk = () => {
-    console.log(1);
-  };
-
-  const handleCancel = () => {
-    setDelModel(false)
-  };
-  return (<Layout store={store} curKey="tags">
-    <Button type="primary" >新增</Button>
-    <Table dataSource={data} columns={columns} />
-
-
-  </Layout>)
-}
-export async function getServerSideProps() {
-  // Fetch data from external API
-  const res = await serverTag();
-  // Pass data to the page via props
-  console.log(res.data.data);
-  if (res.data.code === 200) {
-    return { props: { data: res.data.data } }
+@observer
+class App extends React.Component<{ store: Istore, data: any }, {}> {
+  readonly state = {
+    columns: [
+      {
+        title: '标签',
+        dataIndex: 'title',
+        width: 100,
+        key: 'title',
+      },
+      {
+        title: '图标',
+        dataIndex: 'icon',
+        width: 100,
+        key: 'icon',
+        render: (icon: string) => (
+          <img width="50" src={icon} />
+        ),
+      },
+      {
+        title: '操作',
+        key: 'operation',
+        // fixed: 'right',
+        width: 100,
+        render: () => <div><a >编辑</a> <a >删除</a> </div>,
+      },
+    ],
   }
-  return { props: { data: [] } }
+  componentDidMount() {
+    console.log(this.props)
+  }
+  public async getServerSideProps() {
+    const res = await serverTag();
+    console.log(res.data.data);
+    if (res.data.code === 200) {
+      return { props: { data: res.data.data } }
+    }
+    return { props: { data: [] } }
+  }
+  public render() {
+    const { data } = this.props;
+    const { columns } = this.state;
+    return <Layout curKey="tags">
+      <Button type="primary" >新增</Button>
+      <Table dataSource={data} columns={columns} />
+    </Layout>
+  }
 }
 
-export default Index
+export default App

@@ -1,6 +1,6 @@
 import { Form, Input, Button, Checkbox, Layout, Row, Col } from 'antd';
-import { Istore } from '../store/index'
 import { observer } from "mobx-react";
+import { Istore } from '../store/index'
 const layout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 12 },

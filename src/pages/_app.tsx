@@ -1,11 +1,11 @@
 
 import App, { Container } from 'next/app'
-import React from 'react'
+import React, { ComponentType, Component } from 'react'
 import './app.less';
-import * as store from '../store/index';
-import { observer } from "mobx-react";
+import store from '../store/index';
+import { observer, Provider } from "mobx-react";
 import { withRouter } from 'next/router'
-console.log('store', store)
+
 class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }: any) {
     let pageProps = {}
@@ -16,10 +16,9 @@ class MyApp extends App {
 
     return { pageProps }
   }
-
   render() {
     const { Component, pageProps, router } = this.props
-    return <Component store={store} router={router} {...pageProps} />
+    return <Provider store={store}  ><Component router={router} {...pageProps} /></Provider>
   }
 }
 

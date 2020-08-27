@@ -4,12 +4,23 @@ import { Layout, Menu, Modal } from 'antd';
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
 import RightNav from '../RightNav';
 import './index.less';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { Istore } from '../../store';
 const { Header, Content, Footer, Sider } = Layout;
 
-export default ({ store, curKey, children, title = 'title' }: any) => {
-  // console.log(1);
-  return (
-    <div>
+interface Props {
+  store: Istore,
+  title: string
+  curKey: string
+  children: any
+}
+
+
+class App extends React.Component<Partial<Props>, {}> {
+  public render() {
+    const { title, curKey, children } = this.props;
+    return <div>
       <Head>
         <title>{title}</title>
         <meta charSet='utf-8' />
@@ -36,5 +47,7 @@ export default ({ store, curKey, children, title = 'title' }: any) => {
 
 
     </div>
-  )
+  }
 }
+
+export default App
