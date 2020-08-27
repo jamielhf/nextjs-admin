@@ -1,13 +1,17 @@
 
-import { Button, Table, Switch, Tag } from "antd";
+import { Button, Table, Switch, Modal } from "antd";
 import Layout from '../components/Layout';
 import Router from 'next/router'
-import { serverCategory } from '../api/category'
+import { serverTag } from '../api/tags'
+import { useState } from 'react';
 
-const Index = ({ data = [] }: any) => {
+const Index = ({ store, data = [] }: any) => {
+  console.log(store);
+  const [delModel, setDelModel] = useState(false);
+
   const columns = [
     {
-      title: '分类',
+      title: '标签',
       dataIndex: 'title',
       width: 100,
       key: 'title',
@@ -22,37 +26,34 @@ const Index = ({ data = [] }: any) => {
       ),
     },
     {
-      title: '标签',
-      width: 200,
-      dataIndex: 'tags',
-      key: 'tags',
-      render: (tags: any) => (
-        <span>
-          {tags.map((tag: any) => {
-            return (
-              <Tag key={tag.id}>
-                {tag.title}
-              </Tag>
-            );
-          })}
-        </span>
-      ),
-    },
-    {
-      title: 'Action',
+      title: '操作',
       key: 'operation',
       // fixed: 'right',
       width: 100,
-      render: () => <a>操作</a>,
+      render: () => <div><a onClick={showModal}>编辑</a> <a onClick={showModal}>删除</a> </div>,
     },
   ];
-  return (<Layout curKey="category">
+  const showModal = () => {
+    setDelModel(true)
+  };
+
+  const handleOk = () => {
+    console.log(1);
+  };
+
+  const handleCancel = () => {
+    setDelModel(false)
+  };
+  return (<Layout store={store} curKey="tags">
+    <Button type="primary" >新增</Button>
     <Table dataSource={data} columns={columns} />
+
+
   </Layout>)
 }
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await serverCategory();
+  const res = await serverTag();
   // Pass data to the page via props
   console.log(res.data.data);
   if (res.data.code === 200) {

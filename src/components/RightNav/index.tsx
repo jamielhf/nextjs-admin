@@ -27,6 +27,9 @@ const Index = ({ curKey }: { curKey: string }) => {
         <Menu.Item key="category" icon={<AppstoreOutlined />}>
           <Link href="/category"><a >分类列表</a></Link>
         </Menu.Item>
+        <Menu.Item key="tags" icon={<AppstoreOutlined />}>
+          <Link href="/tags"><a >标签列表</a></Link>
+        </Menu.Item>
         <SubMenu key="sub1" icon={<UserOutlined />} title="User">
           <Menu.Item key="3">Tom</Menu.Item>
           <Menu.Item key="4">Bill</Menu.Item>
