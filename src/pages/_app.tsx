@@ -18,7 +18,7 @@ class MyApp extends App {
   }
   render() {
     const { Component, pageProps, router } = this.props
-    return <Provider store={store}  ><Component router={router} {...pageProps} /></Provider>
+    return <Provider  ><Component store={store} router={router} {...pageProps} /></Provider>
   }
 }
 

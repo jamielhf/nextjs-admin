@@ -48,7 +48,7 @@ class App extends React.Component<{ store: Istore, data: any }, {}> {
     return { props: { data: [] } }
   }
   public render() {
-    const { data } = this.props;
+    const { data, store } = this.props;
     const { columns } = this.state;
     return <Layout curKey="tags">
       <Button type="primary" >新增</Button>

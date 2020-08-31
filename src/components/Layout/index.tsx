@@ -7,6 +7,7 @@ import './index.less';
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Istore } from '../../store';
+import { observer } from 'mobx-react';
 const { Header, Content, Footer, Sider } = Layout;
 
 interface Props {
@@ -16,10 +17,11 @@ interface Props {
   children: any
 }
 
-
+@observer
 class App extends React.Component<Partial<Props>, {}> {
   public render() {
-    const { title, curKey, children } = this.props;
+    const { store, title = 'admin', curKey, children } = this.props;
+    console.log(1, this.props);
     return <div>
       <Head>
         <title>{title}</title>
@@ -37,7 +39,7 @@ class App extends React.Component<Partial<Props>, {}> {
           </Content>
           <Modal
             title="提示"
-            visible={true}
+            visible={false}
           >
             <p>是否删除</p>
           </Modal>
