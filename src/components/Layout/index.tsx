@@ -6,7 +6,7 @@ import RightNav from '../RightNav';
 import './index.less';
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Istore } from '../../store';
+import { Istore } from '../../store/index';
 import { observer } from 'mobx-react';
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -21,7 +21,7 @@ interface Props {
 class App extends React.Component<Partial<Props>, {}> {
   public render() {
     const { store, title = 'admin', curKey, children } = this.props;
-    console.log(1, this.props);
+    const { model } = store;
     return <div>
       <Head>
         <title>{title}</title>
@@ -38,10 +38,13 @@ class App extends React.Component<Partial<Props>, {}> {
             </div>
           </Content>
           <Modal
-            title="提示"
-            visible={false}
+            title={model.modelTitle}
+            visible={model.isShowModel}
+            onOk={model.onOk}
+            confirmLoading={false}
+            onCancel={model.onCancel}
           >
-            <p>是否删除</p>
+            <p>{model.modelContent}</p>
           </Modal>
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>

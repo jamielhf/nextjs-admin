@@ -8,13 +8,14 @@ autorun(() => {
   console.log('user', user);
 })
 
-
 export interface Istore {
   user: User,
   model: Model,
 }
 
-export default {
+const store: Istore = {
   user,
   model,
 }
+
+export default store

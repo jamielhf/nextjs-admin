@@ -1,23 +1,44 @@
 import { computed, observable, action, autorun } from "mobx";
 
-class Model {
-  @observable isShowModel: boolean = false; // 是否显示弹窗
-  @observable modelContent: string = ''; // 弹窗内容
-  @observable modelTitle: string = '提示'; // 弹窗标题
-  @observable onOk = () => { }; // 确认回调
-  @observable onCancel = () => { }; // 取消回调
+interface showModel {
+  modelTitle: string,
+  modelContent: string,
+  onOk: () => void
+  onCancel: () => void,
+}
 
+class Model {
   /**
-   * 显示弹窗
+   *是否显示弹窗
    *
-   * @param {string} modelTitle
-   * @param {string} modelContent
-   * @param {*} [onOk=() => { }]
-   * @param {*} [onCancel=() => { }]
+   * @type {boolean}
    * @memberof Model
    */
+  @observable isShowModel: boolean = false;
+  /**
+   * 弹窗内容
+   * @type {string}
+   */
+  @observable modelContent: string = '';
+  /**
+   * 弹窗标题
+   *
+   * @type {string}
+   * @memberof Model
+   */
+  @observable modelTitle: string = '提示';
+  /**
+   * 确认回调
+   */
+  @observable onOk = () => { this.isShowModel = false; console.log('确认回调') };
+  /**
+   * 取消回调
+   */
+  @observable onCancel = () => { this.isShowModel = false; console.log('取消回调') };
+
+
   @action
-  async showModel(modelTitle: string, modelContent: string, onOk = () => { }, onCancel = () => { },) {
+  async showModel({ modelTitle = this.modelTitle, modelContent = this.modelContent, onOk = this.onOk, onCancel = this.onCancel }: Partial<showModel>) {
     this.isShowModel = true;
     this.modelTitle = modelTitle;
     this.modelContent = modelContent;
