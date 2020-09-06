@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://lhf.huya.com:3003/';
+export const BASE_URL = 'http://lhf.com:3003/';
