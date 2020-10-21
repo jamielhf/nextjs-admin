@@ -2,9 +2,10 @@
 import { Button, Table, Switch } from "antd";
 import Layout from '../components/Layout';
 import Router from 'next/router'
+import { Istore } from '../store/index';
 import { serverArticle } from '../api/article'
 
-const Index = ({ data = [] }: any) => {
+const Index = ({ store, data = [] }: { store: Istore, data: any }) => {
   const columns = [
     {
       title: 'ID',
@@ -22,14 +23,12 @@ const Index = ({ data = [] }: any) => {
       key: 'content',
     },
   ];
-  return (<Layout curKey="article">
+  return (<Layout store={store} curKey="article">
     <Table dataSource={data} columns={columns} />
   </Layout>)
 }
 export async function getServerSideProps() {
-  // Fetch data from external API
   const res = await serverArticle();
-  // Pass data to the page via props
   if (res.data.code === 200) {
     return { props: { data: res.data.data } }
   }

@@ -58,7 +58,6 @@ const Index = ({ store, data = [] }: { store: Istore, data: any }) => {
 }
 export async function getServerSideProps() {
   const res = await serverTag();
-  console.log(res.data.data);
   if (res.data.code === 200) {
     return { props: { data: res.data.data } }
   }

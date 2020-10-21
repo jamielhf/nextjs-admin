@@ -16,7 +16,8 @@ instance.interceptors.request.use(
     return config;
   },
   error => {
-    return Promise.reject(error);
+    message.error('timeout');
+    return Promise.resolve(error);
   }
 );
 
@@ -30,7 +31,8 @@ instance.interceptors.response.use((response) => {
   }
   return response.data;
 }, (error) => {
-  return Promise.reject(error);
+  message.error('timeout');
+  return Promise.resolve(error);
 });
 
 

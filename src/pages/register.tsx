@@ -42,7 +42,13 @@ const Login = observer(({ store }: { store: Istore }) => {
             >
               <Input />
             </Form.Item>
-
+            <Form.Item
+              label="邮箱"
+              name="email"
+              rules={[{ required: true, message: '请输入邮箱' }]}
+            >
+              <Input />
+            </Form.Item>
             <Form.Item
               label="密码"
               name="password"
@@ -54,10 +60,10 @@ const Login = observer(({ store }: { store: Istore }) => {
 
             <Form.Item {...tailLayout}>
               <Button type="primary" htmlType="submit">
-                登录
+                提交注册
         </Button>
-              <Link href="/register">
-                <a>注册</a>
+              <Link href="/login">
+                <a>返回登录</a>
               </Link>{' '}
             </Form.Item>
           </Form>

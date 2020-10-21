@@ -3,8 +3,8 @@ import { Button, Table, Switch, Tag } from "antd";
 import Layout from '../components/Layout';
 import Router from 'next/router'
 import { serverCategory } from '../api/category'
-
-const Index = ({ data = [] }: any) => {
+import { Istore } from '../store/index';
+const Index = ({ store, data = [] }: { store: Istore, data: any }) => {
   const columns = [
     {
       title: '分类',
@@ -46,15 +46,12 @@ const Index = ({ data = [] }: any) => {
       render: () => <a>操作</a>,
     },
   ];
-  return (<Layout curKey="category">
+  return (<Layout store={store} curKey="category">
     <Table dataSource={data} columns={columns} />
   </Layout>)
 }
 export async function getServerSideProps() {
-  // Fetch data from external API
   const res = await serverCategory();
-  // Pass data to the page via props
-  console.log(res.data.data);
   if (res.data.code === 200) {
     return { props: { data: res.data.data } }
   }
